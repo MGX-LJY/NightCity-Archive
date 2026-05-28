@@ -1,6 +1,11 @@
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vitepress';
 import { buildSidebar } from './sidebar.mjs';
 import { buildWikilinkMap, wikilinkPlugin } from './wikilinks.mjs';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const WEB_NODE_MODULES = path.resolve(__dirname, '..', 'node_modules');
 
 const linkMap = buildWikilinkMap();
 const sidebar = buildSidebar();
@@ -16,6 +21,14 @@ export default defineConfig({
   vite: {
     server: {
       host: true,
+    },
+    resolve: {
+      // content/ 在 web/ 外层、本身不含 node_modules，rollup 从 md 位置向上找 vue 会失败；
+      // 显式把 vue 锚定到 web/node_modules，让 SSR build 能解析 vue/server-renderer 等子路径。
+      alias: [
+        { find: /^vue\/(.*)$/, replacement: path.join(WEB_NODE_MODULES, 'vue', '$1') },
+        { find: /^vue$/, replacement: path.join(WEB_NODE_MODULES, 'vue') },
+      ],
     },
     ssr: {
       noExternal: ['vis-network', 'vis-data'],
