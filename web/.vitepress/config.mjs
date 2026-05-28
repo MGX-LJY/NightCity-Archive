@@ -19,15 +19,23 @@ export default defineConfig({
   ignoreDeadLinks: true,
 
   vite: {
+    // srcDir=../content 让 vite 默认 root 落到 content/，那里没有 node_modules，
+    // 导致 dev optimizer 与 rollup 解析 vitepress 自身的 peer 依赖时全部失败。
+    // 把 cacheDir 锁到 web/ 下，并显式 alias vue / vitepress 常用 peer，确保解析走 web/node_modules。
+    cacheDir: path.resolve(__dirname, '..', 'node_modules', '.vite'),
     server: {
       host: true,
+      fs: { allow: [path.resolve(__dirname, '..', '..')] },
     },
     resolve: {
-      // content/ 在 web/ 外层、本身不含 node_modules，rollup 从 md 位置向上找 vue 会失败；
-      // 显式把 vue 锚定到 web/node_modules，让 SSR build 能解析 vue/server-renderer 等子路径。
       alias: [
         { find: /^vue\/(.*)$/, replacement: path.join(WEB_NODE_MODULES, 'vue', '$1') },
         { find: /^vue$/, replacement: path.join(WEB_NODE_MODULES, 'vue') },
+        { find: '@vue/devtools-api', replacement: path.join(WEB_NODE_MODULES, '@vue', 'devtools-api') },
+        { find: /^@vueuse\/core$/, replacement: path.join(WEB_NODE_MODULES, '@vueuse', 'core') },
+        { find: /^@vueuse\/integrations\/(.*)$/, replacement: path.join(WEB_NODE_MODULES, '@vueuse', 'integrations', '$1') },
+        { find: /^mark\.js\/(.*)$/, replacement: path.join(WEB_NODE_MODULES, 'mark.js', '$1') },
+        { find: /^minisearch$/, replacement: path.join(WEB_NODE_MODULES, 'minisearch') },
       ],
     },
     ssr: {
