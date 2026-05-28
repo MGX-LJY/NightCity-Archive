@@ -39,7 +39,7 @@ stop.vbs                双击关闭本地 Wiki
 - **原始资料**统一放 `00_原始资料/`，不做复杂拆分
 - **思想主题**严格控制数量(目前只允许 `公司统治`/`AI与黑墙`/`数字永生`/`赛博精神病` 等核心设定独立成文)
 
-完整规则见 [CLAUDE.md](./Claude.md) 与 [content/CLAUDE.md](./content/Claude.md)。
+完整规则见 [Claude.md](./Claude.md)。
 
 ---
 
