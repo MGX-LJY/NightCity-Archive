@@ -1,0 +1,22 @@
+.wikilink {
+  text-decoration: none;
+  border-bottom: 1px dashed var(--vp-c-brand-2);
+  padding-bottom: 1px;
+}
+.wikilink:hover {
+  border-bottom-style: solid;
+}
+.wikilink-broken {
+  color: var(--vp-c-warning-1);
+  border-bottom: 1px dotted var(--vp-c-warning-1);
+  cursor: help;
+}
+
+.nca-doc-after {
+  margin-top: 2rem;
+}
+
+.nca-graph-page .VPDoc .container,
+.nca-graph-page .VPDoc .content {
+  max-width: none !important;
+}

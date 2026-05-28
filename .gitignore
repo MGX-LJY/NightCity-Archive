@@ -1,0 +1,22 @@
+# Node / VitePress
+node_modules/
+web/.vitepress/cache/
+web/.vitepress/dist/
+*.log
+
+# Obsidian 工作区状态（保留 graph/core-plugins 等可共享配置）
+content/.obsidian/workspace.json
+content/.obsidian/workspace-mobile.json
+content/.obsidian/app.json
+
+# IDE
+.idea/workspace.xml
+.idea/shelf/
+.idea/httpRequests/
+.idea/dataSources/
+.idea/dataSources.local.xml
+
+# OS
+Thumbs.db
+.DS_Store
+desktop.ini

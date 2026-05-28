@@ -1,0 +1,20 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <list>
+          <option value="watchdog" />
+          <option value="DrissionPage" />
+          <option value="RapidFuzz" />
+          <option value="wxautox4" />
+          <option value="urlextract" />
+          <option value="Flask" />
+          <option value="flask-socketio" />
+          <option value="flask-cors" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyTypeCheckerInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+  </profile>
+</component>
