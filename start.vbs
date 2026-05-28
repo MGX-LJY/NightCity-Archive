@@ -29,6 +29,8 @@ For Each p In procs
 Next
 If alreadyRunning Then
     sh.Run url, 1, False
+    MsgBox "Dev server is already running." & vbCrLf & "Browser opened: " & url, _
+           vbInformation, "NightCity Archive"
     WScript.Quit 0
 End If
 
@@ -60,6 +62,9 @@ Loop
 
 If ready Then
     sh.Run url, 1, False
+    MsgBox "Dev server started." & vbCrLf & "URL: " & url & vbCrLf & "Use stop.vbs to shut down.", _
+           vbInformation, "NightCity Archive"
 Else
-    MsgBox "Dev server did not start in 60s. Check log: " & logFile, vbExclamation, "NightCity Archive"
+    MsgBox "Dev server did not start in 60s." & vbCrLf & "Check log: " & logFile, _
+           vbExclamation, "NightCity Archive"
 End If

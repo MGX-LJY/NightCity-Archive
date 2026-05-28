@@ -20,4 +20,10 @@ For Each p In procs
     End If
 Next
 
-' 静默退出, 不弹窗 (避免双击后还要点确定)
+If killed > 0 Then
+    MsgBox "Dev server stopped." & vbCrLf & "Killed " & killed & " process(es).", _
+           vbInformation, "NightCity Archive"
+Else
+    MsgBox "No vitepress / npm run dev process was running.", _
+           vbInformation, "NightCity Archive"
+End If
