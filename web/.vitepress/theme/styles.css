@@ -16,6 +16,65 @@
   margin-top: 2rem;
 }
 
+/* 人物头像：默认隐藏，点击"显示头像"按钮才出现（按钮由主题 JS 注入） */
+.vp-doc h1 + p img {
+  display: none;
+}
+/* 显示态：百科式右侧浮动信息卡，正文在左侧环绕 */
+.vp-doc h1 + p img.nca-portrait-show {
+  display: block;
+  float: right;
+  width: 270px;
+  max-width: 40%;
+  margin: 0.25rem 0 1rem 1.75rem;
+  border: 1px solid var(--vp-c-brand-1);
+  border-radius: 8px;
+  background: var(--vp-c-bg-soft);
+  box-shadow: 0 0 14px rgba(41, 255, 255, 0.12);
+  cursor: zoom-out;
+}
+/* "显示头像"切换按钮：浮在右侧、占头像的位置 */
+.nca-portrait-toggle {
+  float: right;
+  margin: 0.25rem 0 1rem 1.75rem;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.85rem;
+  line-height: 1.2;
+  color: var(--vp-c-brand-1);
+  background: var(--vp-c-bg-soft);
+  border: 1px dashed var(--vp-c-brand-1);
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.15s ease;
+}
+.nca-portrait-toggle:hover {
+  background: var(--vp-c-bg-mute);
+}
+/* 让标题下那一段（头像 + 引用块）能正确包住浮动 */
+.vp-doc h1 + p {
+  margin-top: 0;
+}
+/* 有头像的人物页：去掉会横切头像的分节横线，改用留白分隔，观感更自然 */
+.vp-doc:has(h1 + p img) h2 {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 2.4rem;
+}
+/* 窄屏：取消浮动，头像 / 按钮居中 */
+@media (max-width: 768px) {
+  .vp-doc h1 + p img.nca-portrait-show {
+    float: none;
+    width: 60%;
+    max-width: 260px;
+    margin: 1rem auto;
+  }
+  .nca-portrait-toggle {
+    float: none;
+    display: inline-block;
+  }
+}
+
 .nca-graph-page .VPDoc .container,
 .nca-graph-page .VPDoc .content {
   max-width: none !important;
