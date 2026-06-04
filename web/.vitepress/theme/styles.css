@@ -79,3 +79,44 @@
 .nca-graph-page .VPDoc .content {
   max-width: none !important;
 }
+
+/* 原始资料显示 / 隐藏开关（导航栏按钮） */
+.nca-raw-toggle {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 8px;
+  padding: 0 12px;
+  height: 32px;
+  font-size: 12px;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--vp-c-brand-1);
+  background: var(--vp-c-bg-soft);
+  border: 1px dashed var(--vp-c-brand-1);
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.nca-raw-toggle:hover {
+  background: var(--vp-c-bg-mute);
+}
+.nca-raw-toggle.is-hidden {
+  color: var(--vp-c-text-2);
+  border-style: dotted;
+  border-color: var(--vp-c-text-3);
+}
+
+/* 开关开启隐藏态：折叠侧边栏「原始资料」整组 */
+html.nca-hide-raw .nca-raw-group {
+  display: none !important;
+}
+
+/* 窄屏下导航栏空间紧张，按钮文字略缩 */
+@media (max-width: 768px) {
+  .nca-raw-toggle {
+    margin-left: 6px;
+    padding: 0 8px;
+    font-size: 11px;
+  }
+}

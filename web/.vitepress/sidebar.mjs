@@ -14,6 +14,7 @@ const CATEGORY_LABELS = {
   '05_历史事件': '历史事件',
   '06_地点': '地点',
   '07_思想主题': '思想主题',
+  '09_时间线': '时间线',
 };
 
 const HIDE_TOPLEVEL_FILES = new Set(['索引.md']);

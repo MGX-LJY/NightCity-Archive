@@ -61,7 +61,7 @@ export default defineConfig({
     nav: [
       { text: '索引', link: '/' },
       { text: '人物', link: '/01_人物/00_主角与同伴/V' },
-      { text: '公司', link: '/02_公司/荒坂' },
+      { text: '公司', link: '/02_公司/超级企业/荒坂' },
       { text: '事件', link: '/05_历史事件/第四次公司战争' },
       { text: '思想', link: '/07_思想主题/公司统治' },
       { text: '🕸 图谱', link: '/__网站/图谱' },
