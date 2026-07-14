@@ -1,5 +1,7 @@
 # T-Bug
 
+![T-Bug](../../__assets/人物/T-Bug.png)
+
 > 英文原名: **T-Bug**
 > 别名: Bug / 状态: 已故（2077 年 5 月死于夜之城）/ 配音: Cynthia Kaye McWilliams
 
