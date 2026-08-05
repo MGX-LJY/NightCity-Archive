@@ -1,0 +1,16 @@
+.git
+.github
+.idea
+.agents
+.claude
+.codex
+ec_work_config
+web/node_modules
+web/.vitepress/cache
+web/.vitepress/dist
+web/*.log
+*.log
+start.vbs
+stop.vbs
+names.txt
+
