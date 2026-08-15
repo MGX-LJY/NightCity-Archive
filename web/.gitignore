@@ -1,4 +1,9 @@
 node_modules
 .vitepress/cache
 .vitepress/dist
+.vitepress/dist */
+.vitepress/.temp
+.vitepress/dist-next
+.vitepress/dist-previous
+public/__data/backlinks/
 *.log

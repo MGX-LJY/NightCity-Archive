@@ -1,22 +1,10 @@
-import { h } from 'vue';
+import { defineAsyncComponent, h } from 'vue';
 import DefaultTheme from 'vitepress/theme';
-import Backlinks from './Backlinks.vue';
-import LocalGraph from './LocalGraph.vue';
-import GlobalGraph from './GlobalGraph.vue';
-import RawToggle from './RawToggle.vue';
+import DocAfter from './DocAfter.vue';
 import './styles.css';
 
-// 给侧边栏「原始资料」这一整组打标记，便于 CSS 在隐藏开关开启时整体折叠
-function tagRawSidebarGroup() {
-  if (typeof document === 'undefined') return;
-  const groups = document.querySelectorAll('.VPSidebarItem.level-0');
-  groups.forEach((g) => {
-    const label = g.querySelector(':scope > .item .text');
-    if (label && label.textContent.trim() === '原始资料') {
-      g.classList.add('nca-raw-group');
-    }
-  });
-}
+// 全局图谱包含完整关系数据，只在图谱页真正使用时再下载和初始化。
+const GlobalGraph = defineAsyncComponent(() => import('./GlobalGraph.vue'));
 
 // 给人物头像（标题正下方那张图）注入"显示/隐藏"切换按钮：默认隐藏，点击才显示
 function setupPortraitToggles() {
@@ -53,7 +41,6 @@ function schedulePortraitToggles() {
   let tries = 0;
   const tick = () => {
     setupPortraitToggles();
-    tagRawSidebarGroup();
     if (++tries < 8) setTimeout(tick, 100);
   };
   tick();
@@ -63,9 +50,8 @@ export default {
   extends: DefaultTheme,
   Layout() {
     return h(DefaultTheme.Layout, null, {
-      'nav-bar-content-after': () => h(RawToggle),
       'doc-after': () =>
-        h('div', { class: 'nca-doc-after' }, [h(LocalGraph), h(Backlinks)]),
+        h(DocAfter),
     });
   },
   enhanceApp({ app, router }) {

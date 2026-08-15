@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CONTENT_DIR = path.resolve(__dirname, '..', '..', 'content');
+const BACKLINK_PUBLIC_DIR = path.resolve(__dirname, '..', 'public', '__data', 'backlinks');
 
 const SYSTEM_DIR_PREFIX = '__';
 
@@ -97,6 +98,15 @@ export function scanContent() {
 
 export function buildWikilinkMap() {
   return scanContent().linkMap;
+}
+
+export function writeBacklinkFiles(backlinks) {
+  fs.mkdirSync(BACKLINK_PUBLIC_DIR, { recursive: true });
+  for (const [urlPath, entries] of Object.entries(backlinks)) {
+    const output = path.join(BACKLINK_PUBLIC_DIR, `${urlPath}.json`);
+    fs.mkdirSync(path.dirname(output), { recursive: true });
+    fs.writeFileSync(output, JSON.stringify(entries));
+  }
 }
 
 export function wikilinkPlugin(md, linkMap) {

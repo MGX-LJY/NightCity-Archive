@@ -2,29 +2,36 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vitepress';
 import { buildSidebar } from './sidebar.mjs';
-import { buildWikilinkMap, wikilinkPlugin } from './wikilinks.mjs';
+import { scanContent, wikilinkPlugin, writeBacklinkFiles } from './wikilinks.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const WEB_NODE_MODULES = path.resolve(__dirname, '..', 'node_modules');
 
-const linkMap = buildWikilinkMap();
+const contentData = scanContent();
+const linkMap = contentData.linkMap;
+writeBacklinkFiles(contentData.backlinks);
 const sidebar = buildSidebar();
 
 export default defineConfig({
   title: '夜之城档案库',
   description: 'Cyberpunk 2077 世界观 Wiki',
   lang: 'zh-CN',
+  head: [['link', { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' }]],
   srcDir: '../content',
   cleanUrls: true,
   ignoreDeadLinks: true,
 
   vite: {
+    publicDir: path.resolve(__dirname, '..', 'public'),
     // srcDir=../content 让 vite 默认 root 落到 content/，那里没有 node_modules，
     // 导致 dev optimizer 与 rollup 解析 vitepress 自身的 peer 依赖时全部失败。
     // 把 cacheDir 锁到 web/ 下，并显式 alias vue / vitepress 常用 peer，确保解析走 web/node_modules。
     cacheDir: path.resolve(__dirname, '..', 'node_modules', '.vite'),
     server: {
       host: true,
+      port: 5173,
+      strictPort: true,
+      allowedHosts: ['wiki.mgxnet.com'],
       fs: { allow: [path.resolve(__dirname, '..', '..')] },
     },
     resolve: {
@@ -64,6 +71,7 @@ export default defineConfig({
       { text: '公司', link: '/02_公司/超级企业/荒坂' },
       { text: '事件', link: '/05_历史事件/第四次公司战争' },
       { text: '思想', link: '/07_思想主题/公司统治' },
+      { text: '原始资料', link: '/#原始资料' },
       { text: '🕸 图谱', link: '/__网站/图谱' },
     ],
     sidebar,

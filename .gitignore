@@ -2,6 +2,10 @@
 node_modules/
 web/.vitepress/cache/
 web/.vitepress/dist/
+web/.vitepress/dist */
+web/.vitepress/.temp/
+web/.vitepress/dist-next/
+web/.vitepress/dist-previous/
 *.log
 
 # Obsidian 工作区状态（保留 graph/core-plugins 等可共享配置）

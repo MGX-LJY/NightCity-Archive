@@ -1,7 +1,6 @@
 <script setup>
-import { computed } from 'vue';
+import { ref, watch } from 'vue';
 import { useRoute } from 'vitepress';
-import { data as backlinks } from './backlinks.data.mjs';
 import { colorOf, labelOf } from './categoryStyle.mjs';
 
 const route = useRoute();
@@ -14,11 +13,20 @@ function normalize(p) {
   return out;
 }
 
-const entries = computed(() => {
+const entries = ref([]);
+let requestVersion = 0;
+
+watch(() => route.path, async () => {
+  const version = ++requestVersion;
   const key = normalize(route.path);
-  const list = backlinks[key] || backlinks[key + '/'] || [];
-  return list;
-});
+  try {
+    const response = await fetch(`/__data/backlinks${encodeURI(key)}.json`);
+    const data = response.ok ? await response.json() : [];
+    if (version === requestVersion) entries.value = data;
+  } catch {
+    if (version === requestVersion) entries.value = [];
+  }
+}, { immediate: true });
 </script>
 
 <template>
